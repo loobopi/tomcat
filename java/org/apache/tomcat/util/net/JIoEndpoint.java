@@ -51,6 +51,10 @@ import org.apache.tomcat.util.security.PrivilegedSetTccl;
  * @author Yoav Shapira
  * @author Remy Maucherat
  */
+
+/**
+ * BIO 通信节点，用来处理Socket 请求；
+ */
 public class JIoEndpoint extends AbstractEndpoint<Socket> {
 
 
@@ -214,6 +218,7 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
 
                 try {
                     //if we have reached max connections, wait
+                    //是否超过最大连接数
                     countUpOrAwaitConnection();
 
                     Socket socket = null;
@@ -275,6 +280,7 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
 
 
     /**
+     * Socket 处理器；
      * This class is the equivalent of the Worker, but will simply use in an
      * external Executor thread pool.
      */
@@ -302,6 +308,7 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
 
                     try {
                         // SSL handshake
+                        //SSL 握手
                         serverSocketFactory.handshake(socket.getSocket());
                     } catch (Throwable t) {
                         ExceptionUtils.handleThrowable(t);
@@ -312,6 +319,7 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
                         state = SocketState.CLOSED;
                     }
 
+                    //处理socket
                     if ((state != SocketState.CLOSED)) {
                         if (status == null) {
                             state = handler.process(socket, SocketStatus.OPEN_READ);
@@ -509,6 +517,7 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
 
 
     /**
+     * 处理一个新的客户端连接，爆撞socket，将keep-alive 和 其他属性传输到执行器中；
      * Process a new connection from a new client. Wraps the socket so
      * keep-alive and other attributes can be tracked and then passes the socket
      * to the executor for processing.
@@ -531,6 +540,7 @@ public class JIoEndpoint extends AbstractEndpoint<Socket> {
             if (!running) {
                 return false;
             }
+            //线程池；
             getExecutor().execute(new SocketProcessor(wrapper));
         } catch (RejectedExecutionException x) {
             log.warn("Socket processing request was rejected for:"+socket,x);

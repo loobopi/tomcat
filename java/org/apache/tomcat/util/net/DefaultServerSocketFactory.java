@@ -29,6 +29,10 @@ import java.net.Socket;
  * @author db@eng.sun.com
  * @author Harish Prabandham
  */
+
+/**
+ * ServerSocket工厂；
+ */
 public class DefaultServerSocketFactory implements ServerSocketFactory {
 
     /**
@@ -55,6 +59,12 @@ public class DefaultServerSocketFactory implements ServerSocketFactory {
         return new ServerSocket (port, backlog, ifAddress);
     }
 
+    /**
+     * 接收Socket链接
+     * @param socket
+     * @return
+     * @throws IOException
+     */
     @Override
     public Socket acceptSocket(ServerSocket socket) throws IOException {
         return socket.accept();

@@ -20,6 +20,10 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
+/**
+ * Socket包装类；
+ * @param <E>
+ */
 public class SocketWrapper<E> {
 
     protected volatile E socket;

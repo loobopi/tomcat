@@ -62,6 +62,10 @@ import org.apache.tomcat.util.net.SocketStatus;
 import org.apache.tomcat.util.net.SocketWrapper;
 import org.apache.tomcat.util.res.StringManager;
 
+/**
+ * Http1.1处理连接处理抽象类；
+ * @param <S>
+ */
 public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
 
     /**
@@ -1077,6 +1081,7 @@ public abstract class AbstractHttp11Processor<S> extends AbstractProcessor<S> {
         rp.setStage(org.apache.coyote.Constants.STAGE_PARSE);
 
         // Setting up the I/O
+        //设置IO信息；
         setSocketWrapper(socketWrapper);
         getInputBuffer().init(socketWrapper, endpoint);
         getOutputBuffer().init(socketWrapper, endpoint);
