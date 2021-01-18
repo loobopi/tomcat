@@ -53,6 +53,10 @@ import org.apache.tomcat.util.res.StringManager;
  * @author Craig R. McClanahan
  * @author Remy Maucherat
  */
+
+/**
+ * tomcat Connector组件
+ */
 public class Connector extends LifecycleMBeanBase  {
 
     private static final Log log = LogFactory.getLog(Connector.class);
@@ -67,11 +71,18 @@ public class Connector extends LifecycleMBeanBase  {
     /**
      * Defaults to using HTTP/1.1 NIO implementation.
      */
+    /**
+     * 初始化并设置默认协议为 HTTP/1.1
+     */
     public Connector() {
         this("HTTP/1.1");
     }
 
 
+    /**
+     * 指定协议并初始化Connector
+     * @param protocol
+     */
     public Connector(String protocol) {
         configuredProtocol = protocol;
         ProtocolHandler p = null;

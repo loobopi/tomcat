@@ -45,6 +45,10 @@ import org.apache.juli.logging.LogFactory;
  * @author Craig R. McClanahan
  * @author Remy Maucherat
  */
+
+/**
+ * Tomcat 服务器启动类
+ */
 public final class Bootstrap {
 
     private static final Log log = LogFactory.getLog(Bootstrap.class);
